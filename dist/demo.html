@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DEMO</title>
+	<link rel="stylesheet" href="customselect.min.css">
+</head>
+<body>
+	<form action="" method="POST">
+	<span class="catalog-sort__name">Sort by:</span>
+	<select class="select" name="select">
+		<option value="?sort=price-max">max price</option>
+		<option value="?sort=price-min">min ptice</option>
+		<option value="?sort=date">date</option>
+		<option value="?sort=show">popularity</option>
+		<option value="?sort=name">name</option>
+		<option value="?sort=autor">autor</option>
+		<option value="?sort=email">mails</option>
+		<option value="?sort=default">for an arbitrary field that's just come up with the author</option>
+		<option value="?sort=long">along an arbitrary field, which is the longest in the list</option>
+	</select>
+	<input type="submit" value="Send"/>
+	</form>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="customselect.min.js"></script>
+	<script>
+		$('.select').select();
+	</script>
+</body>
+</html>
