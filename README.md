@@ -2,7 +2,7 @@
 
 ##Description
 
-This "plug-in" allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.
+This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.
 
 ##Initialization
 
