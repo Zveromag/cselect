@@ -22,7 +22,7 @@ new Select(el, options);
   <input type="submit" value="Send"/>
 </form>
 ````
-[view demo](https://codepen.io/Zveromag/pen/GjjvVx)
+[view demo](https://codepen.io/Zveromag/pen/wrYbbN/)
 
 ## Options
 
