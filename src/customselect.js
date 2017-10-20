@@ -1,3 +1,4 @@
+/***Autor Zveerko; GitHub (https://github.com/Zveromag/)***/
 (function(window){
 
   'use strict';

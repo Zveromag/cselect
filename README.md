@@ -15,7 +15,7 @@ new Select(el, options);
 <form action="" method="POST">
 <span class="catalog-sort__name">Sort:</span>
     <select class="select" name="select">
-      <option value="?sort=price-max">to increase prices</option>
+      <option selected value="?sort=price-max">to increase prices</option>
       <option value="?sort=price-min">on price reduction</option>
       <option value="?sort=date">novelty</option>
     </select>
