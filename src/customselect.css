@@ -107,10 +107,17 @@ select {
   background-color: #53aaff;
   color: #fff;
 }
-
 .select-js__item.is-active {
   background: #1e90ff;
   color: #fff;
+}
+.select-js__item--disabled {
+  color: #a5a5a5;
+  cursor: no-drop;
+}
+.select-js__item--disabled:hover {
+  background-color: transparent;
+  color: #a5a5a5;
 }
 
 /*-----animate-----*/

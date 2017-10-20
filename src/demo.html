@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DEMO</title>
+	<link rel="stylesheet" href="customselect.css">
+</head>
+<body>
+	<h2>Description</h2>
+
+	<p>This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
+		stylized standard select. Mechanic behavior as much as possible trying to match the standard select'у.</p>
+
+	<h2>Initialization</h2>
+
+	<code>new Select(el, options);</code>
+
+	<h2>Demo</h2>
+	<form action="" method="POST">
+		<span class="catalog-sort__name">Sort:</span>
+		<select class="select" name="select">
+				<option selected value="?sort=price-max">to increase prices</option>
+				<option disabled value="?sort=price-min">on price reduction</option>
+				<option value="?sort=date">novelty</option>
+				<option disabled value="?sort=show">by popularity</option>
+				<option value="?sort=name">by name</option>
+				<option disabled value="?sort=autor">autor</option>
+				<option value="?sort=email">the mailbox</option>
+				<option value="?sort=default">for an arbitrary field that's just come up with the author</option>
+				<option disabled value="?sort=long">along an arbitrary field, which is the longest in the list</option>
+			</select>
+		<input type="submit" value="Send" />
+	</form>
+
+	<h2>Options</h2>
+
+	<b><code>animations : ''</code></b>
+
+	<p>Animates the appearance of the list type:string. Can have the following options:</p>
+
+	<ul>
+		<li>slideInUp</li>
+		<li>zoomInDown</li>
+		<li>slideInDown</li>
+		<li>fadeIn</li>
+	</ul>
+
+	<p>Default fulfills without animation. If desired / required, you can expand the number of its animations.</p>
+
+	<hr style="border:0;border-top:1px dashed #bebebe" />
+	<b><code>maxWidth :</code></b>
+
+	<p>It allows you to set the maximum width of the drop-down list type:integer. If you specify a maximum width of less than or
+		equal to the original selecta, the maximum width of the original selecta will be exhibited.</p>
+	<hr style="border:0;border-top:1px dashed #bebebe" />
+	<b><code>onChange : function(value, text, index){}</code></b>
+
+	<p>This method allows you to get a value of the selected item.</p>
+
+	<h2><a href="https://codepen.io/Zveromag/pen/wrYbbN/" target="_blank">Online demo</a> || <a href="http://devloyalty.com" target="_blank">Website</a></h2>
+
+	<script src="customselect.js"></script>
+	<script>
+		var selects = Array.prototype.slice.call(document.querySelectorAll('.select'));
+
+		selects.forEach(function(el) {
+			var test = new Select(el, {
+				maxWidth: 320,
+				animations: 'fadeIn',
+				onChange : function(value, text, index){
+					alert('You are change (' + text + ') index item (' + index + ') and value he hav (' + value + ')')
+				}
+			})
+		})
+	</script>
+</body>
+</html>

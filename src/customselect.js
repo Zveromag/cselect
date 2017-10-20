@@ -64,6 +64,7 @@
     this.listEvent = this.clickItem.bind(this);
     this.nameEvent = this.clickName.bind(this);
     this.keybordEvent = this.keydown.bind(this);
+    this.closeEvent = this.clickDocument.bind(this);
 
     this.createSelect();
 
@@ -73,6 +74,7 @@
     this.slWrap.addEventListener('click', this.nameEvent);
     window.addEventListener('resize', this.resizeEvent);
     document.documentElement.addEventListener('keydown', this.keybordEvent);
+    document.documentElement.addEventListener('click', this.closeEvent);
 
   }
 
@@ -81,10 +83,15 @@
 
     var frag = document.createDocumentFragment();
     this.options.forEach(function(option) {
-      var isSelected = option.hasAttribute('selected')
+      var isSelected = option.hasAttribute('selected');
+      var isDisabled = option.hasAttribute('disabled');
       var elItem = document.createElement('li');
       elItem.className = 'select-js__item';
       elItem.dataset.selected = isSelected;
+      if (isDisabled) {
+        elItem.dataset.disabled = isDisabled;
+        elItem.className = 'select-js__item select-js__item--disabled';
+      }
       elItem.dataset.get = option.value;
       elItem.textContent = option.textContent;
 
@@ -97,7 +104,7 @@
   Select.prototype.createSelect = function() {
     this.slListExt.appendChild(this.genOptions());
     this.slWrap.appendChild(this.slListExt);
-    this.mainSelect.parentNode.insertBefore(this.slWrap, this.mainSelect);
+    this.mainSelect.parentNode.insertBefore(this.slWrap, this.mainSelect.nextSibling);
 
     this.slTitle = this.slWrap.querySelector('.select-js__name');
     this.slList = this.slWrap.querySelector('.select-js__list');
@@ -137,7 +144,7 @@
       this.slWrap.style.maxWidth = this.settings.maxWidth + 'px';
     }
     else {
-      this.slWrap.style.width = this.mainSelect.offsetWidth + 'px';
+      this.slWrap.style.width = this.mainSelectWidth + 'px';
     }
 
 		// set position list from select block
@@ -165,7 +172,7 @@
       });
     }
     else {
-      this.slList.style.width = this.mainSelect.offsetWidth + 'px';
+      this.slList.style.width = this.mainSelectWidth + 'px';
     }
 	}
 	// moving activ item from list items
@@ -173,7 +180,9 @@
     var target = this.slList.querySelector('.' + this.activeClass);
     var highlightIndex = indexElement(target, this.slItems);
 
-    if(!(highlightIndex >= 0)) return;
+    var sd = this.fix(key, highlightIndex);
+
+    /* if(!(highlightIndex >= 0)) return;
 
     if(key === this.KEYS.UP) {
       highlightIndex -= 1;
@@ -185,12 +194,39 @@
 
     if(highlightIndex < 0 || highlightIndex >= this.listLength ) {
       return;
-    }
+    } */
 
-    this.highlight(highlightIndex);
-    this.activated(highlightIndex);
-    this.scroll(highlightIndex);
-	}
+    this.highlight(sd);
+    this.activated(sd);
+    this.scroll(sd);
+  }
+  Select.prototype.fix = function(key, highlightIndex) {
+    var self = this;
+
+    var test = function(key, highlightIndex) {
+      if(key === self.KEYS.UP) {
+        highlightIndex -= 1;
+      }
+
+      if(key === self.KEYS.DOWN) {
+        highlightIndex += 1;
+      }
+
+      if(highlightIndex < 0) {
+        highlightIndex = 0;
+      }
+
+      if (highlightIndex >= self.listLength) {
+        highlightIndex = self.listLength - 1;
+      }
+
+      if (self.slItems[highlightIndex].dataset.disabled) {
+        return test(key, highlightIndex);
+      }
+      return highlightIndex;
+    }
+    return test(key, highlightIndex);
+  }
 	// activated focused item
   Select.prototype.highlight = function(highlightIndex) {
     this.slList.querySelector('.' + this.activeClass).classList.remove(this.activeClass);
@@ -204,6 +240,8 @@
 	// activated selected item and activated item from old hidden select
   Select.prototype.get = function() {
     var getItem = this.slList.querySelector('.' + this.activeClass);
+    if (getItem.dataset.disabled) return;
+
     var index = indexElement(getItem, this.slItems);
 
     this.settings.onChange(getItem.dataset.get, getItem.textContent, index);
@@ -233,19 +271,23 @@
 
     this.slTitle.classList.toggle('is-open');
     this.slList.classList.toggle('is-open');
-    this.isOpen = (this.isOpen) ? false : true;
+    this.isOpen = !this.isOpen;
 	}
 	// close item list
-  Select.prototype.close = function() {
-    this.slTitle.classList.remove('is-open');
-    this.slList.classList.remove('is-open');
-    this.isOpen = false;
+  Select.prototype.close = function(evt) {
+    if (this.isOpen) {
+      this.slTitle.classList.remove('is-open');
+      this.slList.classList.remove('is-open');
+      this.isOpen = false;
+    }
+
 	}
 	// event clicked item
   Select.prototype.clickItem = function(evt) {
   	var target = evt.target.closest('li');
 
     if (!target) return;
+    if (target.dataset.disabled) return;
 
     var index = indexElement(target, this.slItems);
     this.highlight(index);
@@ -272,6 +314,30 @@
           this.move(evt.which);
         }
       }
+  }
+  // event click document close select list
+  Select.prototype.clickDocument = function(evt) {
+    if (evt.target.classList.contains('select-js__name')) return;
+    this.close();
+  }
+  // destroy plugins
+  Select.prototype.destroy = function() {
+    this.slTitle.removeEventListener('click', this.toggleEvent);
+    this.slListExt.removeEventListener('click', this.listEvent);
+    this.slWrap.removeEventListener('click', this.nameEvent);
+    window.removeEventListener('resize', this.resizeEvent);
+    document.documentElement.removeEventListener('keydown', this.keybordEvent);
+    document.documentElement.removeEventListener('click', this.closeEvent);
+
+    this.slWrap.removeChild(this.slListExt);
+    this.slWrap.parentNode.removeChild(this.slWrap);
+    this.mainSelect.removeAttribute('hidden');
+
+    // clear object
+    for(var name in this) {
+      delete this[name];
+    }
+
   }
 
   window.Select = Select;
