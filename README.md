@@ -1,16 +1,16 @@
-#Custom select
+# Custom select
 
-##Description
+## Description
 
 This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.
 
-##Initialization
+## Initialization
 
 ````javaScript
-$('.select').select();
+new Select(el, options);
 ````
 
-##Demo
+## Demo
 ````html
 <form action="" method="POST">
 <span class="catalog-sort__name">Sort:</span>
@@ -24,7 +24,7 @@ $('.select').select();
 ````
 [view demo](https://codepen.io/Zveromag/pen/GjjvVx)
 
-##Options
+## Options
 
 defaults values
 
@@ -42,5 +42,5 @@ fadeIn
 maxWidth : 0
 
 //this method allows you to get a value of the selected item.
-onChange : function(){}
+onChange : function(value, text, index){}
 ````

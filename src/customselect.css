@@ -1,8 +1,21 @@
+/*fast style attr*/
+/*default style*/
+select {
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
 *,
 *::after,
 *::before {
   box-sizing: border-box;
 }
+
+/*plagin style*/
 .select-js__box {
   position: relative;
   display: inline-block;
