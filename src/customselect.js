@@ -27,6 +27,32 @@
   function indexElement(el, arr) {
     return arr.indexOf(el);
   }
+  function nextAll(el) {
+    var matched = [];
+
+    if (!el) return matched;
+
+    while(el = el.nextSibling) {
+      if (el.nodeType === 1) {
+        matched.push(el);
+      }
+    }
+
+    return matched;
+  }
+  function prevAll(el) {
+    var matched = [];
+
+    if (!el) return matched;
+
+    while(el = el.previousSibling) {
+      if (el.nodeType === 1) {
+        matched.push(el);
+      }
+    }
+
+    return matched;
+  }
 
   function Select(el, options) {
     if (!(el instanceof Node)) {
@@ -36,6 +62,7 @@
     this.mainSelect = el;
 
     this.activeClass = 'is-active';
+    this.currentIndex = 0;
 
     // default options
     this.settings = extend({
@@ -178,54 +205,66 @@
 	// moving activ item from list items
   Select.prototype.move = function(key) {
     var target = this.slList.querySelector('.' + this.activeClass);
-    var highlightIndex = indexElement(target, this.slItems);
-
-    var sd = this.fix(key, highlightIndex);
-
-    /* if(!(highlightIndex >= 0)) return;
-
-    if(key === this.KEYS.UP) {
-      highlightIndex -= 1;
-    }
+    this.currentIndex = indexElement(target, this.slItems);
 
     if(key === this.KEYS.DOWN) {
-      highlightIndex += 1;
+      this.moveDown();
+    }
+    if(key === this.KEYS.UP) {
+      this.moveUp();
     }
 
-    if(highlightIndex < 0 || highlightIndex >= this.listLength ) {
-      return;
-    } */
-
-    this.highlight(sd);
-    this.activated(sd);
-    this.scroll(sd);
+    this.highlight(this.currentIndex);
+    this.activated(this.currentIndex);
+    this.scroll(this.currentIndex);
   }
-  Select.prototype.fix = function(key, highlightIndex) {
+  Select.prototype.moveDown = function() {
     var self = this;
+    self.currentIndex += 1;
+    var disabled = false;
+    var nextEnabled = nextAll(self.slItems[self.currentIndex]).some(function(el) {
+      if (el.dataset.disabled) return false;
+      else return true;
+    });
 
-    var test = function(key, highlightIndex) {
-      if(key === self.KEYS.UP) {
-        highlightIndex -= 1;
+    if (self.slItems[self.currentIndex]) {
+      if (self.slItems[self.currentIndex].dataset.disabled) {
+        disabled = true;
       }
-
-      if(key === self.KEYS.DOWN) {
-        highlightIndex += 1;
-      }
-
-      if(highlightIndex < 0) {
-        highlightIndex = 0;
-      }
-
-      if (highlightIndex >= self.listLength) {
-        highlightIndex = self.listLength - 1;
-      }
-
-      if (self.slItems[highlightIndex].dataset.disabled) {
-        return test(key, highlightIndex);
-      }
-      return highlightIndex;
     }
-    return test(key, highlightIndex);
+    if (self.currentIndex === self.listLength) {
+      self.currentIndex -= 1;
+    }
+    else if (disabled && nextEnabled) {
+      return self.moveDown();
+    }
+    if (disabled && !nextEnabled) {
+      self.currentIndex -= 1;
+    }
+  }
+  Select.prototype.moveUp = function() {
+    var self = this;
+    self.currentIndex -= 1;
+    var disabled = false;
+    var prevEnabled = prevAll(self.slItems[self.currentIndex]).some(function(el) {
+      if (el.dataset.disabled) return false;
+      else return true;
+    });
+
+    if (self.slItems[self.currentIndex]) {
+      if (self.slItems[self.currentIndex].dataset.disabled) {
+        disabled = true;
+      }
+    }
+    if (self.currentIndex === -1) {
+      self.currentIndex += 1;
+    }
+    else if (disabled && prevEnabled) {
+      return self.moveUp();
+    }
+    if (disabled && !prevEnabled) {
+      self.currentIndex += 1;
+    }
   }
 	// activated focused item
   Select.prototype.highlight = function(highlightIndex) {
