@@ -3,12 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>DEMO</title>
-	<link rel="stylesheet" href="customselect.min.css">
+	<link rel="stylesheet" href="customselect.css">
 </head>
 <body>
 	<h2>Description</h2>
 
-	<p>This "plug-in" allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
+	<p>This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
 		stylized standard select. Mechanic behavior as much as possible trying to match the standard select'у.</p>
 
 	<h2>Initialization</h2>
@@ -19,14 +19,14 @@
 	<form action="" method="POST">
 		<span class="catalog-sort__name">Sort:</span>
 		<select class="select" name="select">
-				<option selected value="?sort=price-max">to increase prices</option>
-				<option value="?sort=price-min">on price reduction</option>
+				<option disabled selected value="?sort=price-max">to increase prices</option>
+				<option disabled value="?sort=price-min">on price reduction</option>
 				<option value="?sort=date">novelty</option>
-				<option value="?sort=show">by popularity</option>
+				<option disabled value="?sort=show">by popularity</option>
 				<option value="?sort=name">by name</option>
-				<option value="?sort=autor">autor</option>
-				<option value="?sort=email">the mailbox</option>
-				<option value="?sort=default">for an arbitrary field that's just come up with the author</option>
+				<option disabled value="?sort=autor">autor</option>
+				<option disabled value="?sort=email">the mailbox</option>
+				<option disabled value="?sort=default">for an arbitrary field that's just come up with the author</option>
 				<option value="?sort=long">along an arbitrary field, which is the longest in the list</option>
 			</select>
 		<input type="submit" value="Send" />
@@ -59,12 +59,12 @@
 
 	<h2><a href="https://codepen.io/Zveromag/pen/wrYbbN/" target="_blank">Online demo</a> || <a href="http://devloyalty.com" target="_blank">Website</a></h2>
 
-	<script src="customselect.min.js"></script>
+	<script src="customselect.js"></script>
 	<script>
 		var selects = Array.prototype.slice.call(document.querySelectorAll('.select'));
 
 		selects.forEach(function(el) {
-			new Select(el, {
+			var test = new Select(el, {
 				maxWidth: 320,
 				animations: 'fadeIn',
 				onChange : function(value, text, index){

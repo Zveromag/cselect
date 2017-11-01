@@ -1,0 +1,155 @@
+/*fast style attr*/
+$selectIcon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNMTAuMzEyIDBMNS41IDQuNjY2LjY4OCAwIDAgLjY2NyA1LjUgNiAxMSAuNjY3Ii8+PC9zdmc+';
+$selectActiveBg: #1e90ff;
+$selectActiveColor: #fff;
+$selectHoverBg: #53aaff;
+$selectHoverColor: #fff;
+$selectBorder: 1px solid #ccc;
+$selectOpenBorder: 1px solid #1e90ff;
+$listBorder: 1px solid #1e90ff;
+$listBg: #fff;
+
+/*default style*/
+select {
+  outline:none;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor:pointer;
+  max-width:250px;
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+  }
+/*plagin style*/
+.select-js__box {
+  position: relative;
+  display:inline-block;
+  vertical-align:middle;
+  max-width:inherit;
+}
+.select-js__name {
+  border: $selectBorder;
+  padding: 5px 10px;
+  padding-right: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size:inherit;
+  font-family:inherit;
+  cursor:pointer;
+  outline:none;
+  overflow:hidden;
+  user-select:none;
+  &::after {
+    content: '';
+    z-index: 2;
+    position: absolute;
+    background-image:url($selectIcon);
+    opacity: .7;
+    right: 7px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform .4s;
+  }
+}
+.select-js__name.is-open  {
+  border: $selectOpenBorder;
+  &::after {
+    transform:rotate(180deg)
+  }
+}
+.select-js__list {
+  position:absolute;
+  max-width:inherit;
+  max-height: 200px;
+  max-width: 300px;
+  border-top: 0;
+  width:100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  user-select:none;
+  visibility: hidden;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background: $listBg;
+  border: $listBorder;
+  z-index: 1;
+}
+.select-js__list.is-open  {
+  visibility: visible;
+}
+.select-js__item {
+  padding: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:inherit;
+  font-family:inherit;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  &:hover {
+    background-color: $selectHoverBg;
+    color: $selectHoverColor;
+  }
+  &--disabled {
+    color: #9f9f9f;
+    cursor: no-drop;
+    &:hover {
+      background-color: transparent;
+      color: #9f9f9f;
+    }
+  }
+}
+.select-js__item.is-active {
+  background: $selectActiveBg;
+  color: $selectActiveColor;
+}
+/*-----animate-----*/
+.slideInUp,
+.zoomInDown,
+.slideInDown,
+.fadeIn {
+  transition: all .3s ease-in-out;
+}
+.slideInUp {
+  transform: translateY(10px);
+  opacity: 0;
+}
+.slideInUp.is-open {
+  visibility:visible;
+  transform: translateY(0);
+  opacity:1;
+}
+.slideInDown {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+.slideInDown.is-open {
+  visibility:visible;
+  transform: translateY(0);
+  opacity:1;
+}
+.fadeIn {
+  opacity:0;
+}
+.fadeIn.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.zoomInDown {
+  transform-origin: 50% 0;
+  opacity:0;
+  transform: scale(.5) translateY(-10px);
+}
+.zoomInDown.is-open {
+  transform: scale(1) translateY(0);
+  visibility:visible;
+  opacity:1;
+}
