@@ -62,6 +62,7 @@
     this.mainSelect = el;
 
     this.activeClass = 'is-active';
+    this.isFocus = false;
     this.currentIndex = 0;
 
     // default options
@@ -74,35 +75,56 @@
     // Keybord shortcuts
     this.KEYS = {
       ENTER: 13,
+      SPACE: 32,
       DOWN: 40,
       ESC: 27,
       UP: 38
     };
+
+    // Create custom select wrapper
     this.slWrap = document.createElement('div');
     this.slWrap.className = 'select-js__box';
-    this.slWrap.innerHTML = '<div class="select-js__name"></div>';
-    this.slListExt = document.createElement('ul');
-    this.slListExt.className = 'select-js__list';
+
+    //  Create select name
+    this.slTitle = document.createElement('div');
+    this.slTitle.className = 'select-js__name';
+    // Add focus for accessibility
+    this.slTitle.setAttribute('tabindex', 0);
+
+    //  Create custom option list
+    this.slList = document.createElement('ul');
+    this.slList.className = 'select-js__list';
+
+    //  Get select options
     this.options = Array.prototype.slice.call(this.mainSelect.querySelectorAll('option'));
 
-    // cache methods
+    // bind methods
     this.resizeEvent = this.position.bind(this);
     this.toggleEvent = this.toggle.bind(this);
     this.listEvent = this.clickItem.bind(this);
     this.nameEvent = this.clickName.bind(this);
     this.keybordEvent = this.keydown.bind(this);
     this.closeEvent = this.clickDocument.bind(this);
+    this.hasFocus = this.focusState.bind(this);
 
+    // create custom select
     this.createSelect();
 
 		// Bind events
-    this.slTitle.addEventListener('click', this.toggleEvent);
-    this.slListExt.addEventListener('click', this.listEvent);
     this.slWrap.addEventListener('click', this.nameEvent);
+    this.slList.addEventListener('click', this.listEvent);
+    this.slTitle.addEventListener('click', this.toggleEvent);
+    this.slTitle.addEventListener('keydown', this.keybordEvent);
+    this.slTitle.addEventListener('focus', this.hasFocus);
+    this.slTitle.addEventListener('blur', this.hasFocus);
     window.addEventListener('resize', this.resizeEvent);
-    document.documentElement.addEventListener('keydown', this.keybordEvent);
     document.documentElement.addEventListener('click', this.closeEvent);
+  }
 
+  Select.prototype.focusState = function (evt) {
+    // Check focus state
+    var type = evt.type;
+    this.isFocus = (type === 'focus') ? true : false;
   }
 
 	// generate default options
@@ -129,12 +151,15 @@
 	}
 	// create new select
   Select.prototype.createSelect = function() {
-    this.slListExt.appendChild(this.genOptions());
-    this.slWrap.appendChild(this.slListExt);
+    // this.slListExt.appendChild(this.genOptions());
+    this.slList.appendChild(this.genOptions());
+    // this.slWrap.appendChild(this.slListExt);
+    this.slWrap.appendChild(this.slTitle);
+    this.slWrap.appendChild(this.slList);
     this.mainSelect.parentNode.insertBefore(this.slWrap, this.mainSelect.nextSibling);
 
-    this.slTitle = this.slWrap.querySelector('.select-js__name');
-    this.slList = this.slWrap.querySelector('.select-js__list');
+    // this.slTitle = this.slWrap.querySelector('.select-js__name');
+    // this.slList = this.slWrap.querySelector('.select-js__list');
     this.slItems = Array.prototype.slice.call(this.slWrap.querySelectorAll('.select-js__item'));
     this.listHeight = this.slList.offsetHeight;
     this.listLength = this.slItems.length;
@@ -293,15 +318,13 @@
 	}
 	// moving scroll
   Select.prototype.scroll = function(highlightIndex) {
-    var listScroll = this.slList.scrollHeight;
-    var listScrollTop = this.slList.scrollTop;
+    var slList = this.slList.getBoundingClientRect();
+    var slOption = this.slItems[highlightIndex].getBoundingClientRect();
 
-
-    if (listScroll > this.listHeight) {
-      var itemOffset = this.slItems[highlightIndex].getBoundingClientRect().top + document.body.scrollTop;
-      var listOffset = this.slList.getBoundingClientRect().top + document.body.scrollTop;
-
-      this.slList.scrollTop = ( itemOffset - ( listOffset - listScrollTop ) );
+    if (slList.top > slOption.top) {
+      this.slList.scrollTop = this.slList.scrollTop - slList.top + slOption.top;
+    } else if (slList.bottom < slOption.bottom) {
+      this.slList.scrollTop = this.slList.scrollTop - slList.bottom + slOption.bottom;
     }
 	}
 	// added and removing active class in the list item
@@ -341,14 +364,19 @@
 	}
 	// event keybord key
   Select.prototype.keydown = function(evt) {
-  	if (this.isOpen) {
+  	// if (this.isOpen) {
+    if (this.isFocus) {
         if (evt.which === this.KEYS.ENTER) {
           this.get();
+        }
+        if (evt.which === this.KEYS.SPACE) {
+          evt.preventDefault();
+          this.toggle();
         }
         if (evt.which === this.KEYS.ESC) {
           this.close();
         }
-        if (evt.which === this.KEYS.UP  || evt.which === this.KEYS.DOWN) {
+        if (evt.which === this.KEYS.UP || evt.which === this.KEYS.DOWN) {
           evt.preventDefault();
           this.move(evt.which);
         }
@@ -361,14 +389,19 @@
   }
   // destroy plugins
   Select.prototype.destroy = function() {
+    this.slList.removeEventListener('click', this.listEvent);
+
     this.slTitle.removeEventListener('click', this.toggleEvent);
-    this.slListExt.removeEventListener('click', this.listEvent);
+    this.slTitle.removeEventListener('keydown', this.keybordEvent);
+    this.slTitle.removeEventListener('focus', this.hasFocus);
+    this.slTitle.removeEventListener('blur', this.hasFocus);
+
     this.slWrap.removeEventListener('click', this.nameEvent);
     window.removeEventListener('resize', this.resizeEvent);
-    document.documentElement.removeEventListener('keydown', this.keybordEvent);
     document.documentElement.removeEventListener('click', this.closeEvent);
 
-    this.slWrap.removeChild(this.slListExt);
+    this.slWrap.removeChild(this.slList);
+    this.slWrap.removeChild(this.slTitle);
     this.slWrap.parentNode.removeChild(this.slWrap);
     this.mainSelect.removeAttribute('hidden');
 
