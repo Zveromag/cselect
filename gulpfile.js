@@ -1,9 +1,10 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var autoprefix = require('gulp-autoprefixer');
-var csso = require('gulp-csso');
+var gulp        = require('gulp');
+var sass        = require('gulp-sass');
+var uglify      = require('gulp-uglify');
+var rename      = require('gulp-rename');
+var autoprefix  = require('gulp-autoprefixer');
+var csso        = require('gulp-csso');
+var browserSync = require('browser-sync').create();
 
 // sass
 gulp.task('sass', function () {
@@ -17,6 +18,7 @@ gulp.task('sass', function () {
     .pipe(csso())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('dist'))
+    .pipe(browserSync.stream())
 });
 
 //js
@@ -26,12 +28,26 @@ gulp.task('js', function() {
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist'))
+    .pipe(browserSync.stream())
+});
+
+gulp.task('sync', ['sass'], () => {
+  browserSync.init({
+    server: {
+      baseDir: './dist',
+      index: 'demo.html'
+    },
+    port: 8080
+  });
+  gulp.watch(['./src/**/*.scss'], ['sass']);
+  gulp.watch(['./src/**/*.js'], ['js']);
+  gulp.watch('./dist/demo.html').on('change', browserSync.reload);
 });
 
 
 
-
-gulp.task('default', function () {
-  gulp.watch('./src/**/*.scss', ['sass']);
-  gulp.watch('./src/**/*.js', ['js']);
-});
+// gulp.task('default', function () {
+//   gulp.watch('./src/**/*.scss', ['sass']);
+//   gulp.watch('./src/**/*.js', ['js']);
+// });
+gulp.task('default', ['sync']);

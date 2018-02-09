@@ -34,12 +34,16 @@ select {
   font-size: inherit;
   font-family: inherit;
   cursor: pointer;
-  outline: none;
   overflow: hidden;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.select-js__name:focus {
+  -webkit-box-shadow: 0 0 1px 1px #1e90ff;
+  box-shadow: 0 0 1px 1px #1e90ff;
 }
 
 .select-js__name::after {
