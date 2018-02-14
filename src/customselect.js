@@ -1,6 +1,6 @@
 /***Autor Zveerko; GitHub (https://github.com/Zveromag/)***/
 (function(window) {
-  "use strict";
+  'use strict';
 
   function extend(out) {
     out = out || {};
@@ -12,7 +12,7 @@
 
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
-          if (typeof obj[key] === "object")
+          if (typeof obj[key] === 'object')
             out[key] = extend(out[key], obj[key]);
           else out[key] = obj[key];
         }
@@ -53,19 +53,19 @@
 
   function Select(el, options) {
     if (!(el instanceof Node)) {
-      throw new Error("el must be a Node");
+      throw new Error('el must be a Node');
     }
 
     this.mainSelect = el;
 
-    this.activeClass = "is-active";
+    this.activeClass = 'is-active';
     this.isFocus = false;
     this.currentIndex = 0;
 
     // default options
     this.settings = extend(
       {
-        animations: "",
+        animations: '',
         maxWidth: 0,
         onChange: function() {}
       },
@@ -82,22 +82,22 @@
     };
 
     // Create custom select wrapper
-    this.slWrap = document.createElement("div");
-    this.slWrap.className = "select-js__box";
+    this.slWrap = document.createElement('div');
+    this.slWrap.className = 'select-js__box';
 
     //  Create select name
-    this.slTitle = document.createElement("div");
-    this.slTitle.className = "select-js__name";
+    this.slTitle = document.createElement('div');
+    this.slTitle.className = 'select-js__name';
     // Add focus for accessibility
-    this.slTitle.setAttribute("tabindex", 0);
+    this.slTitle.setAttribute('tabindex', 0);
 
     //  Create custom option list
-    this.slList = document.createElement("ul");
-    this.slList.className = "select-js__list";
+    this.slList = document.createElement('ul');
+    this.slList.className = 'select-js__list';
 
     //  Get select options
     this.options = Array.prototype.slice.call(
-      this.mainSelect.querySelectorAll("option")
+      this.mainSelect.querySelectorAll('option')
     );
 
     // bind methods
@@ -113,23 +113,23 @@
     this.createSelect();
 
     // Bind events
-    this.slWrap.addEventListener("click", this.nameEvent);
-    this.slList.addEventListener("click", this.listEvent);
-    this.slTitle.addEventListener("click", this.toggleEvent);
-    this.slTitle.addEventListener("keydown", this.keybordEvent);
-    this.slTitle.addEventListener("focus", this.hasFocus);
-    this.slTitle.addEventListener("blur", this.hasFocus);
-    window.addEventListener("resize", this.resizeEvent);
-    document.documentElement.addEventListener("click", this.closeEvent);
+    this.slWrap.addEventListener('click', this.nameEvent);
+    this.slList.addEventListener('click', this.listEvent);
+    this.slTitle.addEventListener('click', this.toggleEvent);
+    this.slTitle.addEventListener('keydown', this.keybordEvent);
+    this.slTitle.addEventListener('focus', this.hasFocus);
+    this.slTitle.addEventListener('blur', this.hasFocus);
+    window.addEventListener('resize', this.resizeEvent);
+    document.documentElement.addEventListener('click', this.closeEvent);
   }
 
   Select.prototype.focusState = function(evt) {
     // Check focus state
     var type = evt.type;
-    this.isFocus = type === "focus" ? true : false;
+    this.isFocus = type === 'focus' ? true : false;
 
     // When pressing a TAB key, save focus if the customselect is opened
-    if (type === "blur" && this.isOpen) {
+    if (type === 'blur' && this.isOpen) {
       this.close();
       this.slTitle.focus();
     }
@@ -139,14 +139,14 @@
   Select.prototype.genOptions = function(options) {
     var frag = document.createDocumentFragment();
     this.options.forEach(function(option) {
-      var isSelected = option.hasAttribute("selected");
-      var isDisabled = option.hasAttribute("disabled");
-      var elItem = document.createElement("li");
-      elItem.className = "select-js__item";
+      var isSelected = option.hasAttribute('selected');
+      var isDisabled = option.hasAttribute('disabled');
+      var elItem = document.createElement('li');
+      elItem.className = 'select-js__item';
       elItem.dataset.selected = isSelected;
       if (isDisabled) {
         elItem.dataset.disabled = isDisabled;
-        elItem.className = "select-js__item select-js__item--disabled";
+        elItem.className = 'select-js__item select-js__item--disabled';
       }
       elItem.dataset.get = option.value;
       elItem.textContent = option.textContent;
@@ -171,7 +171,7 @@
     // this.slTitle = this.slWrap.querySelector('.select-js__name');
     // this.slList = this.slWrap.querySelector('.select-js__list');
     this.slItems = Array.prototype.slice.call(
-      this.slWrap.querySelectorAll(".select-js__item")
+      this.slWrap.querySelectorAll('.select-js__item')
     );
     this.listHeight = this.slList.offsetHeight;
     this.listLength = this.slItems.length;
@@ -190,7 +190,7 @@
     // change selected el from new select
     this.slItems.forEach(
       function(item) {
-        if (item.dataset.selected === "true") {
+        if (item.dataset.selected === 'true') {
           this.slTitle.textContent = item.textContent;
           item.classList.add(this.activeClass);
         }
@@ -198,7 +198,7 @@
     );
 
     // added hidden attribyte old select
-    this.mainSelect.setAttribute("hidden", "hidden");
+    this.mainSelect.setAttribute('hidden', 'hidden');
   };
   // set begins position select and set position on resize window
   Select.prototype.position = function() {
@@ -209,41 +209,41 @@
 
     // initial started main block select max width
     if (this.settings.maxWidth) {
-      this.slWrap.style.width = "100%";
-      this.slWrap.style.maxWidth = this.settings.maxWidth + "px";
+      this.slWrap.style.width = '100%';
+      this.slWrap.style.maxWidth = this.settings.maxWidth + 'px';
     } else {
-      this.slWrap.style.width = this.mainSelectWidth + "px";
+      this.slWrap.style.width = this.mainSelectWidth + 'px';
     }
 
     // set position list from select block
     if (offsetBottom <= offsetTop) {
       extend(this.slList.style, {
-        top: "auto",
-        bottom: selectHeight + "px",
-        "border-bottom": 0,
-        "border-top": ""
+        top: 'auto',
+        bottom: selectHeight + 'px',
+        'border-bottom': 0,
+        'border-top': ''
       });
     } else {
       extend(this.slList.style, {
-        top: selectHeight + "px",
-        bottom: "auto",
-        "border-bottom": "",
-        "border-top": 0
+        top: selectHeight + 'px',
+        bottom: 'auto',
+        'border-bottom': '',
+        'border-top': 0
       });
     }
 
     if (this.settings.maxWidth) {
       extend(this.slList.style, {
-        width: "100%",
-        "max-width": this.settings.maxWidth + "px"
+        width: '100%',
+        'max-width': this.settings.maxWidth + 'px'
       });
     } else {
-      this.slList.style.width = this.mainSelectWidth + "px";
+      this.slList.style.width = this.mainSelectWidth + 'px';
     }
   };
   // moving activ item from list items
   Select.prototype.move = function(key) {
-    var target = this.slList.querySelector("." + this.activeClass);
+    var target = this.slList.querySelector('.' + this.activeClass);
     this.currentIndex = indexElement(target, this.slItems);
 
     if (key === this.KEYS.DOWN) {
@@ -310,7 +310,7 @@
   // activated focused item
   Select.prototype.highlight = function(highlightIndex) {
     this.slList
-      .querySelector("." + this.activeClass)
+      .querySelector('.' + this.activeClass)
       .classList.remove(this.activeClass);
     this.slItems[highlightIndex].classList.add(this.activeClass);
   };
@@ -321,16 +321,16 @@
   };
   // activated selected item and activated item from old hidden select
   Select.prototype.get = function() {
-    var getItem = this.slList.querySelector("." + this.activeClass);
+    var getItem = this.slList.querySelector('.' + this.activeClass);
     if (getItem.dataset.disabled) return;
 
     var index = indexElement(getItem, this.slItems);
 
     this.settings.onChange(getItem.dataset.get, getItem.textContent, index);
     this.options.forEach(function(option) {
-      option.removeAttribute("selected");
+      option.removeAttribute('selected');
     });
-    this.options[index].setAttribute("selected", true);
+    this.options[index].setAttribute('selected', true);
 
     this.close();
   };
@@ -350,21 +350,21 @@
   Select.prototype.toggle = function() {
     if (!this.isOpen) this.position();
 
-    this.slTitle.classList.toggle("is-open");
-    this.slList.classList.toggle("is-open");
+    this.slTitle.classList.toggle('is-open');
+    this.slList.classList.toggle('is-open');
     this.isOpen = !this.isOpen;
   };
   // close item list
   Select.prototype.close = function(evt) {
     if (this.isOpen) {
-      this.slTitle.classList.remove("is-open");
-      this.slList.classList.remove("is-open");
+      this.slTitle.classList.remove('is-open');
+      this.slList.classList.remove('is-open');
       this.isOpen = false;
     }
   };
   // event clicked item
   Select.prototype.clickItem = function(evt) {
-    var target = evt.target.closest("li");
+    var target = evt.target.closest('li');
 
     if (!target) return;
     if (target.dataset.disabled) return;
@@ -376,7 +376,7 @@
   };
   // event clicked name main select
   Select.prototype.clickName = function(evt) {
-    if (evt.target.closest(".select-js__name")) return;
+    if (evt.target.closest('.select-js__name')) return;
 
     this.isOpen && this.close();
   };
@@ -402,26 +402,26 @@
   };
   // event click document close select list
   Select.prototype.clickDocument = function(evt) {
-    if (evt.target.classList.contains("select-js__name")) return;
+    if (evt.target.classList.contains('select-js__name')) return;
     this.close();
   };
   // destroy plugins
   Select.prototype.destroy = function() {
-    this.slList.removeEventListener("click", this.listEvent);
+    this.slList.removeEventListener('click', this.listEvent);
 
-    this.slTitle.removeEventListener("click", this.toggleEvent);
-    this.slTitle.removeEventListener("keydown", this.keybordEvent);
-    this.slTitle.removeEventListener("focus", this.hasFocus);
-    this.slTitle.removeEventListener("blur", this.hasFocus);
+    this.slTitle.removeEventListener('click', this.toggleEvent);
+    this.slTitle.removeEventListener('keydown', this.keybordEvent);
+    this.slTitle.removeEventListener('focus', this.hasFocus);
+    this.slTitle.removeEventListener('blur', this.hasFocus);
 
-    this.slWrap.removeEventListener("click", this.nameEvent);
-    window.removeEventListener("resize", this.resizeEvent);
-    document.documentElement.removeEventListener("click", this.closeEvent);
+    this.slWrap.removeEventListener('click', this.nameEvent);
+    window.removeEventListener('resize', this.resizeEvent);
+    document.documentElement.removeEventListener('click', this.closeEvent);
 
     this.slWrap.removeChild(this.slList);
     this.slWrap.removeChild(this.slTitle);
     this.slWrap.parentNode.removeChild(this.slWrap);
-    this.mainSelect.removeAttribute("hidden");
+    this.mainSelect.removeAttribute('hidden');
 
     // clear object
     for (var name in this) {
