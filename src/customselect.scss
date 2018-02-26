@@ -1,131 +1,156 @@
-/*fast style attr*/
-$selectIcon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNMTAuMzEyIDBMNS41IDQuNjY2LjY4OCAwIDAgLjY2NyA1LjUgNiAxMSAuNjY3Ii8+PC9zdmc+';
-$selectActiveBg: #1e90ff;
-$selectActiveColor: #fff;
-$selectHoverBg: #53aaff;
-$selectHoverColor: #fff;
-$selectBorder: 1px solid #ccc;
-$selectOpenBorder: 1px solid #1e90ff;
-$listBorder: 1px solid #1e90ff;
-$listBg: #fff;
+$select-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNMTAuMzEyIDBMNS41IDQuNjY2LjY4OCAwIDAgLjY2NyA1LjUgNiAxMSAuNjY3Ii8+PC9zdmc+';
+$select-accent-color: #1e90ff;
+$select-active-bg: $select-accent-color;
+$select-bg: #fff;
+$list-bg: #fff;
+$select-padding: 7px 12px;
+$select-hover-bg: #f1f1f1;
+$select-hover-color: #555;
+$select-active-color: #fff;
 
-/*default style*/
+$select-border-width: 2px;
+$list-border-width: 1px;
+
+$select-border: $select-border-width solid #ddd;
+$list-border: $list-border-width solid $select-accent-color;
+
 select {
-  outline:none;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  cursor:pointer;
-  max-width:250px;
-  box-sizing: border-box;
+  min-width: 100px;
 }
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-  }
-/*plagin style*/
-.select-js__box {
+
+.cs {
   position: relative;
   display:inline-block;
   vertical-align:middle;
   max-width:inherit;
-}
-.select-js__name {
-  border: $selectBorder;
-  padding: 5px 10px;
-  padding-right: 20px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size:inherit;
-  font-family:inherit;
-  cursor:pointer;
-  // outline:none;
-  overflow:hidden;
-  user-select:none;
-  &:focus {
-    box-shadow: 0 0 1px 1px $selectActiveBg;
+  outline: 0;
+
+  * {
+    box-sizing: border-box;
   }
-  &::after {
-    content: '';
-    z-index: 2;
-    position: absolute;
-    background-image:url($selectIcon);
-    opacity: .7;
-    right: 7px;
-    top: 10px;
-    width: 10px;
-    height: 10px;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform .4s;
-  }
-}
-.select-js__name.is-open  {
-  border: $selectOpenBorder;
-  &::after {
-    transform:rotate(180deg)
-  }
-}
-.select-js__list {
-  position:absolute;
-  max-width:inherit;
-  max-height: 200px;
-  max-width: 300px;
-  border-top: 0;
-  width:100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  user-select:none;
-  visibility: hidden;
-  overflow-y:auto;
-  overflow-x:hidden;
-  background: $listBg;
-  border: $listBorder;
-  z-index: 1;
-}
-.select-js__list.is-open  {
-  visibility: visible;
-}
-.select-js__item {
-  padding: 0;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size:inherit;
-  font-family:inherit;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  &:hover {
-    background-color: $selectHoverBg;
-    color: $selectHoverColor;
-  }
-  &--disabled {
-    color: #9f9f9f;
-    cursor: no-drop;
-    &:hover {
-      background-color: transparent;
-      color: #9f9f9f;
+
+  &-label {
+    padding: $select-padding;
+    padding-right: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    border: $select-border;
+    overflow: hidden;
+    user-select: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 7px;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      height: 10px;
+      margin: auto;
+      z-index: 2;
+      opacity: .7;
+      background-image: url($select-icon);
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: transform .3s;
     }
   }
+
+  &-list {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    visibility: hidden;
+    overflow-y:auto;
+    overflow-x:hidden;
+    border: $list-border;
+    background: $list-bg;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &-item {
+    padding: $select-padding;
+    font-size: inherit;
+    font-family: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      color: $select-hover-color;
+      background-color: $select-hover-bg;
+    }
+    &--disabled {
+      color: #9f9f9f;
+      cursor: no-drop;
+      &:hover {
+        background-color: transparent;
+        color: #9f9f9f;
+      }
+    }
+    &--group {
+      font-weight: 600;
+    }
+    &--group:not(&--disabled) {
+      color: #555;
+      cursor: default;
+      &:hover {
+        color: currentColor;
+        background-color: transparent;
+      }
+    }
+    &--groupchild {
+      padding-left: 20px;
+    }
+
+    &.is-active {
+      color: $select-active-color;
+      background: $select-active-bg;
+    }
+  }
+
+  &.is-open &-list {
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  &.is-open &-label {
+    &::after {
+      transform:rotate(180deg)
+    }
+  }
+
+  &:focus &-label,
+  &.is-open &-label {
+    border-color: $select-active-bg;
+    box-shadow: 0 2px 10px rgba(#000, .15);
+  }
 }
-.select-js__item.is-active {
-  background: $selectActiveBg;
-  color: $selectActiveColor;
-}
+
 /*-----animate-----*/
 .slideInUp,
 .zoomInDown,
 .slideInDown,
 .fadeIn {
-  transition: all .3s ease-in-out;
+  transition: all .2s ease;
 }
 .slideInUp {
   transform: translateY(10px);
   opacity: 0;
 }
-.slideInUp.is-open {
+.is-open .slideInUp {
   visibility:visible;
   transform: translateY(0);
   opacity:1;
@@ -134,15 +159,16 @@ select {
   transform: translateY(-10px);
   opacity: 0;
 }
-.slideInDown.is-open {
+.is-open .slideInDown {
   visibility:visible;
   transform: translateY(0);
   opacity:1;
 }
 .fadeIn {
+  transition-timing-function: linear;
   opacity:0;
 }
-.fadeIn.is-open {
+.is-open .fadeIn {
   opacity: 1;
   visibility: visible;
 }
@@ -151,7 +177,7 @@ select {
   opacity:0;
   transform: scale(.5) translateY(-10px);
 }
-.zoomInDown.is-open {
+.is-open .zoomInDown {
   transform: scale(1) translateY(0);
   visibility:visible;
   opacity:1;
