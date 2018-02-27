@@ -2,76 +2,405 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>DEMO</title>
-	<link rel="stylesheet" href="customselect.css">
+  <title>DEMO</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,600&amp;subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="customselect.css">
+
+  <style>
+    body {
+      font-size: 1rem;
+      font-family: Fira Sans, sans-serif;
+      color: #555;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    pre {
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      line-height: 1.6;
+      font-size: 0.8rem;
+      tab-size: 4;
+      font-family: 'Fira Mono', monospace;
+      overflow: auto;
+      color: #555;
+      background-color: #f8f8f8;
+    }
+    pre > code {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    code {
+      font-family: 'Fira Mono', monospace;
+      font-size: .8rem;
+      background-color: #f8f8f8;
+    }
+
+    h1,h2,h3 {
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    section {
+      padding: 1rem;
+    }
+    .select-custom .cs-label {
+      border-width: 2px;
+    }
+    .select-custom .cs-label::after {
+      width: 14px;
+      height: 14px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdib3g9IjAgMCAyMCAyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj48cGF0aCBkPSJNMTAgMWwtNSA3aDEwbC01LTd6TTEwIDE5bDUtN2gtMTBsNSA3eiI+PC9wYXRoPjwvc3ZnPg==);
+      -webkit-transform: none;
+              transform: none;
+    }
+    .select-custom.is-open .cs-label,
+    .select-custom:focus .cs-label {
+      border-color: #c5c5c5;
+    }
+    .select-custom.is-open .cs-label {
+      background: #f0f8ff;
+    }
+    .select-custom .cs-list {
+      border-width: 2px;
+      border-color: #c5c5c5;
+    }
+    .select-custom .above {
+      margin-bottom: -2px;
+    }
+    .select-custom .below {
+      margin-top: -2px;
+    }
+    .select-custom .cs-item:hover {
+      background-color: #f1f1f1;
+      color: #555;
+    }
+    .select-custom .cs-item.is-active, .select-custom .cs-item:hover {
+      background-color: #f1f1f1;
+      color: #555;
+    }
+    .select-custom .cs-list::-webkit-scrollbar {
+      width: 10px;
+    }
+    .select-custom .cs-list::-webkit-scrollbar-thumb {
+      min-height: 35px;
+      background-clip: padding-box;
+      background-color: rgba(51, 51, 51, 0.3);
+      border: 1px solid transparent;
+      border-radius: 0;
+    }
+    .select-custom .cs-list::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(51, 51, 51, 0.75);
+    }
+  </style>
 </head>
 <body>
-	<h2>Description</h2>
 
-	<p>This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
-		stylized standard select. Mechanic behavior as much as possible trying to match the standard select'у.</p>
+  <div class="container">
+    <h2>Description</h2>
 
-	<h2>Initialization</h2>
+    <p>This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
+      stylized standard select. Mechanic behavior as much as possible trying to match the standard select'у.</p>
 
-	<code>new Select(el, options);</code>
+    <h2>Initialization</h2>
 
-	<h2>Demo</h2>
-	<form action="" method="POST">
-		<span class="catalog-sort__name">Sort:</span>
-		<select class="select" name="select">
-				<option selected value="?sort=price-max">to increase prices</option>
-				<option disabled value="?sort=price-min">on price reduction</option>
-				<option value="?sort=date">novelty</option>
-				<option disabled value="?sort=show">by popularity</option>
-				<option value="?sort=name">by name</option>
-				<option disabled value="?sort=autor">autor</option>
-				<option disabled value="?sort=email">the mailbox</option>
-				<option disabled value="?sort=default">for an arbitrary field that's just come up with the author</option>
-				<option value="?sort=long">along an arbitrary field, which is the longest in the list</option>
-			</select>
-		<input type="submit" value="Send" />
-	</form>
+    <pre><code>new Select(el, options);</code></pre>
 
-	<h2>Options</h2>
+    <h2>Demo</h2>
+    <form action="" method="POST">
+      <span class="catalog-sort__name">Sort:</span>
+      <select name="select" id="select">
+        <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+        <option value="Gibraltar" disabled>Gibraltar</option>
+        <option value="Sudan">Sudan</option>
+        <option value="Antigua & Barbuda" selected>Antigua & Barbuda</option>
+        <option value="South Korea">South Korea</option>
+        <option value="Diego Garcia" disabled>Diego Garcia</option>
+        <option value="France">France</option>
+        <option value="Guadeloupe">Guadeloupe</option>
+        <option value="Yemen">Yemen</option>
+        <option value="Micronesia" disabled>Micronesia</option>
+        <optgroup for="Option group">
+          <option value="Lesotho">Lesotho</option>
+          <option value="St. Martin" disabled>St. Martin</option>
+          <option value="Kiribati">Kiribati</option>
+        </optgroup>
+        <option value="Lebanon" disabled>Lebanon</option>
+        <option value="Jersey">Jersey</option>
+        <option value="Netherlands">Netherlands</option>
+        <optgroup for="Disabled option group" disabled>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Réunion">Réunion</option>
+          <option value="Antarctica">Antarctica</option>
+        </optgroup>
+        <option value="Botswana">Botswana</option>
+        <option value="Falkland Islands">Falkland Islands</option>
+        <option value="Montenegro">Montenegro</option>
+      </select>
+      <input type="submit" value="Send" />
+    </form>
 
-	<b><code>animations : ''</code></b>
+    <h2>Options</h2>
 
-	<p>Animates the appearance of the list type:string. Can have the following options:</p>
+    <pre><code>animations : ''</code></pre>
 
-	<ul>
-		<li>slideInUp</li>
-		<li>zoomInDown</li>
-		<li>slideInDown</li>
-		<li>fadeIn</li>
-	</ul>
+    <p>Animates the appearance of the list type:string. Can have the following options:</p>
 
-	<p>Default fulfills without animation. If desired / required, you can expand the number of its animations.</p>
+    <ul>
+      <li>slideInUp</li>
+      <li>zoomInDown</li>
+      <li>slideInDown</li>
+      <li>fadeIn</li>
+    </ul>
 
-	<hr style="border:0;border-top:1px dashed #bebebe" />
-	<b><code>maxWidth :</code></b>
+    <p>Default fulfills without animation. If desired / required, you can expand the number of its animations.</p>
 
-	<p>It allows you to set the maximum width of the drop-down list type:integer. If you specify a maximum width of less than or
-		equal to the original selecta, the maximum width of the original selecta will be exhibited.</p>
-	<hr style="border:0;border-top:1px dashed #bebebe" />
-	<b><code>onChange : function(value, text, index){}</code></b>
+    <hr style="border:0;border-top:1px dashed #bebebe" />
+    <pre><code><code>maxWidth :</code></code></pre>
 
-	<p>This method allows you to get a value of the selected item.</p>
+    <p>It allows you to set the maximum width of the drop-down list type:integer. If you specify a maximum width of less than
+      or equal to the original selecta, the maximum width of the original selecta will be exhibited.</p>
+    <hr style="border:0;border-top:1px dashed #bebebe" />
+    <pre><code>onChange : function(value, text, index){}</code></pre>
 
-	<h2><a href="https://codepen.io/Zveromag/pen/wrYbbN/" target="_blank">Online demo</a> || <a href="http://devloyalty.com" target="_blank">Website</a></h2>
+    <p>This method allows you to get a value of the selected item.</p>
+  </div>
+  <div class="container">
+    <h2>Demos</h2>
+  </div>
 
-	<script src="customselect.js"></script>
-	<script>
-		var selects = Array.prototype.slice.call(document.querySelectorAll('.select'));
+  <section>
+    <div class="container">
+      <h3>Change callback</h3>
 
-		selects.forEach(function(el) {
-			var test = new Select(el, {
-				maxWidth: 320,
-				animations: 'fadeIn',
-				onChange : function(value, text, index){
-					alert('You are change (' + text + ') index item (' + index + ') and value he hav (' + value + ')')
-				}
-			})
-		})
-	</script>
+      <select name="callback" id="select-callback">
+        <option value="1" selected>One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+      </select>
+
+      <pre><code class="language-javascript">new Select(el, {
+  onChange: function(event, value, text, index) {
+    alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
+  }
+});</code></pre>
+
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <h3>Show max items</h3>
+      <select name="maxitems" id="select-maxitems">
+        <option value="1" selected>One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+        <option value="6">Six</option>
+        <option value="7">Seven</option>
+      </select>
+
+      <pre><code class="language-javascript">new Select(el, {
+  showMaxOptions: 3
+});</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h3>Max width</h3>
+      <select name="maxwidth" id="select-maxwidth">
+        <option value="1" selected>One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+        <option value="6">Six</option>
+        <option value="7">Seven</option>
+      </select>
+
+      <pre><code class="language-javascript">new Select(el, {
+  maxWidth: 350
+});</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h3>Destroy</h3>
+      <div class="form-group">
+        <select name="maxwidth" id="select-destroy">
+          <option value="1" selected>One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+          <option value="5">Five</option>
+          <option value="6">Six</option>
+          <option value="7">Seven</option>
+        </select>
+      </div>
+      <button id="toggle">destroy</button>
+
+      <pre><code class="language-javascript">var select = new Select(el, {
+  maxWidth: 350
+});
+// some time later
+select.destroy();</code></pre>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h3>New option</h3>
+      <div class="form-group">
+        <select name="maxwidth" id="select-add">
+          <option value="1" selected>One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+          <option value="5">Five</option>
+          <option value="6">Six</option>
+          <option value="7">Seven</option>
+        </select>
+      </div>
+      <button id="addoption">add option</button>
+
+      <pre><code class="language-javascript">var select = new Select(el, {
+  maxWidth: 350
+});
+// Adding new option into system select
+el.innerHTML += '&lt;option value="new_option"&gt;New option&lt;/option&gt;';
+// update custom select
+select.update();</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h3>Custom styles</h3>
+      <div class="form-group">
+        <select name="custom" id="custom">
+          <option value="Gambia">Gambia</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Turks &amp; Caicos Islands">Turks &amp; Caicos Islands</option>
+          <option value="American Samoa">American Samoa</option>
+          <option value="Haiti">Haiti</option>
+          <option value="French Southern Territories">French Southern Territories</option>
+          <option value="Iceland">Iceland</option>
+        </select>
+      </div>
+
+      <pre><code class="language-javascript">var select = new Select(el, {
+  customClass: 'custom' // for example
+});</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h3>Transitions</h3>
+      <div class="form-group">
+        <select name="custom" id="animation">
+          <option value="Gambia">Gambia</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Turks &amp; Caicos Islands">Turks &amp; Caicos Islands</option>
+          <option value="American Samoa">American Samoa</option>
+          <option value="Haiti">Haiti</option>
+          <option value="French Southern Territories">French Southern Territories</option>
+          <option value="Iceland">Iceland</option>
+        </select>
+      </div>
+
+      <pre><code class="language-javascript">var select = new Select(el, {
+  animationClass: 'slideInUp'
+});
+// Available transitions
+// fadeIn | slideInUp | slideInDown | zoomInDown | *
+// * - own
+</code></pre>
+    </div>
+  </section>
+
+<script src="customselect.js"></script>
+<script>
+  var el = document.getElementById('select');
+  var s = new Select(el);
+
+  // Demo 1
+
+  new Select(document.getElementById('select-callback'), {
+    onChange: function (event, value, text, index) {
+      alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
+    }
+  });
+
+  // Demo 2
+  new Select(document.getElementById('select-maxitems'), {
+    showMaxOptions: 3
+  });
+
+  // Demo 3
+  new Select(document.getElementById('select-maxwidth'), {
+    maxWidth: 350
+  });
+
+
+  // Demo 4
+  var options = {
+    maxWidth: 350,
+    animation: 'zoomInDown'
+  }
+  var demo4 = new Select(document.getElementById('select-destroy'), options);
+  document.getElementById('toggle').addEventListener('click', function () {
+    var value = this.textContent;
+    if (value === 'destroy') {
+      demo4.destroy();
+      this.textContent = 'init';
+    } else {
+      demo4 = new Select(document.getElementById('select-destroy'), options);
+      this.textContent = 'destroy';
+    }
+  });
+
+  // Demo 5
+  var select = document.getElementById('select-add');
+  var demo5 = new Select(select, {
+    maxWidth: 350,
+    animation: 'slideInDown'
+  });
+
+  document.getElementById('addoption').addEventListener('click', function () {
+    select.innerHTML += '<option value="new_option">New option</option>';
+    demo5.update();
+  });
+
+  // Demo 6
+  var demo6 = new Select(document.getElementById('custom'), {
+    maxWidth: 250,
+    customClass: 'select-custom',
+    animation: 'fadeIn'
+  });
+
+// Demo 6
+  var demo7 = new Select(document.getElementById('animation'), {
+    animation: 'slideInUp'
+  });
+</script>
 </body>
 </html>
