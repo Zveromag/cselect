@@ -31,23 +31,29 @@ gulp.task('js', function() {
     .pipe(browserSync.stream())
 });
 
-gulp.task('sync', ['sass'], () => {
+gulp.task('sync', ['copy:css', 'copy:js'], () => {
   browserSync.init({
     server: {
-      baseDir: './dist',
-      index: 'demo.html'
+      baseDir: './docs',
+      index: 'index.html'
     },
     port: 8080
   });
-  gulp.watch(['./src/**/*.scss'], ['sass']);
-  gulp.watch(['./src/**/*.js'], ['js']);
-  gulp.watch('./dist/demo.html').on('change', browserSync.reload);
+  gulp.watch(['./src/**/*.scss'], ['copy:css']);
+  gulp.watch(['./src/**/*.js'], ['copy:js']);
+  gulp.watch('./docs/index.html').on('change', browserSync.reload);
+});
+
+gulp.task('copy:css', ['sass'], function() {
+  return gulp.src('./dist/*.min.css')
+    .pipe(gulp.dest('./docs/css'))
+});
+
+gulp.task('copy:js', ['js'], function () {
+  return gulp.src('./dist/*.min.js')
+    .pipe(gulp.dest('./docs/js'))
 });
 
 
-
-// gulp.task('default', function () {
-//   gulp.watch('./src/**/*.scss', ['sass']);
-//   gulp.watch('./src/**/*.js', ['js']);
-// });
 gulp.task('default', ['sync']);
+gulp.task('build', ['sass', 'js']);
