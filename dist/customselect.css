@@ -144,8 +144,14 @@ select {
 .zoomInDown,
 .slideInDown,
 .fadeIn {
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  -webkit-transition-property: visibility, opacity, -webkit-transform;
+  transition-property: visibility, opacity, -webkit-transform;
+  transition-property: visibility, opacity, transform;
+  transition-property: visibility, opacity, transform, -webkit-transform;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
 }
 
 .slideInUp {

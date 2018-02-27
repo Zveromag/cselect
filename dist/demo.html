@@ -65,11 +65,20 @@
     }
     .select-custom.is-open .cs-label,
     .select-custom:focus .cs-label {
-      border-color: #999;
+      border-color: #c5c5c5;
+    }
+    .select-custom.is-open .cs-label {
+      background: #f0f8ff;
     }
     .select-custom .cs-list {
       border-width: 2px;
-      border-color: #999;
+      border-color: #c5c5c5;
+    }
+    .select-custom .above {
+      margin-bottom: -2px;
+    }
+    .select-custom .below {
+      margin-top: -2px;
     }
     .select-custom .cs-item:hover {
       background-color: #f1f1f1;
@@ -113,10 +122,10 @@
         <option value="Côte d'Ivoire">Côte d'Ivoire</option>
         <option value="Gibraltar" disabled>Gibraltar</option>
         <option value="Sudan">Sudan</option>
-        <option value="Antigua & Barbuda">Antigua & Barbuda</option>
-        <option value="South Korea" selected>North Korea</option>
+        <option value="Antigua & Barbuda" selected>Antigua & Barbuda</option>
+        <option value="South Korea">South Korea</option>
         <option value="Diego Garcia" disabled>Diego Garcia</option>
-        <option value="France">Georgia</option>
+        <option value="France">France</option>
         <option value="Guadeloupe">Guadeloupe</option>
         <option value="Yemen">Yemen</option>
         <option value="Micronesia" disabled>Micronesia</option>
@@ -354,7 +363,8 @@ select.update();</code></pre>
 
   // Demo 4
   var options = {
-    maxWidth: 350
+    maxWidth: 350,
+    animation: 'zoomInDown'
   }
   var demo4 = new Select(document.getElementById('select-destroy'), options);
   document.getElementById('toggle').addEventListener('click', function () {
@@ -371,7 +381,8 @@ select.update();</code></pre>
   // Demo 5
   var select = document.getElementById('select-add');
   var demo5 = new Select(select, {
-    maxWidth: 350
+    maxWidth: 350,
+    animation: 'slideInDown'
   });
 
   document.getElementById('addoption').addEventListener('click', function () {
@@ -381,6 +392,7 @@ select.update();</code></pre>
 
   // Demo 6
   var demo6 = new Select(document.getElementById('custom'), {
+    maxWidth: 250,
     customClass: 'select-custom',
     animation: 'fadeIn'
   });

@@ -206,16 +206,19 @@ this.Element && function (ElementPrototype) {
 
         // Get selected index
         if (index === this.mainSelect.selectedIndex) {
-          elItem.dataset.selected = true;
+          // elItem.dataset.selected = true;
+          elItem.setAttribute('data-selected', true);
         }
 
         if (isDisabled) {
-          elItem.dataset.disabled = isDisabled;
+          // elItem.dataset.disabled = isDisabled;
+          elItem.setAttribute('data-disabled', isDisabled);
           elItem.classList.add('cs-item--disabled');
         }
 
         if (isGroup) {
-          elItem.dataset.optgroup = isGroup;
+          // elItem.dataset.optgroup = isGroup;
+          elItem.setAttribute('data-optgroup', isGroup);
           elItem.classList.add('cs-item--group');
           elItem.textContent = option.getAttribute('for');
         } else {
@@ -223,12 +226,14 @@ this.Element && function (ElementPrototype) {
 
           if (optgroup) {
             if (optgroup.hasAttribute('disabled')) {
-              elItem.dataset.disabled = isDisabled;
+              // elItem.dataset.disabled = isDisabled;
+              elItem.setAttribute('data-disabled', true);
               elItem.classList.add('cs-item--disabled');
             }
             elItem.classList.add('cs-item--groupchild');
           }
-          elItem.dataset.value = option.value;
+          // elItem.dataset.value = option.value;
+          elItem.setAttribute('data-value', option.value);
           elItem.textContent = option.textContent;
         }
 
@@ -249,7 +254,8 @@ this.Element && function (ElementPrototype) {
 
       this.slItems.forEach(
         function (item) {
-          if (item.dataset.selected === 'true') {
+          // if (item.dataset.selected === 'true') {
+          if (item.getAttribute('data-selected') === 'true') {
             this.slTitle.textContent = item.textContent;
             item.classList.add(this.activeClass);
             return;
@@ -409,12 +415,14 @@ this.Element && function (ElementPrototype) {
       var skip = false;
       var currentEl = self.slItems[self.currentIndex];
       var nextEnabled = nextAll(currentEl).some(function (el) {
-        if (el.dataset.disabled || el.dataset.optgroup) return false;
+        // if (el.dataset.disabled || el.dataset.optgroup) return false;
+        if (el.hasAttribute('data-disabled') || el.hasAttribute('data-optgroup')) return false;
         else return true;
       });
 
       if (currentEl) {
-        if (currentEl.dataset.disabled || currentEl.dataset.optgroup) {
+        // if (currentEl.dataset.disabled || currentEl.dataset.optgroup) {
+        if (currentEl.hasAttribute('data-disabled') || currentEl.hasAttribute('data-optgroup')) {
           skip = true;
         }
       }
@@ -438,13 +446,14 @@ this.Element && function (ElementPrototype) {
       var prevEnabled = prevAll(currentEl).some(function (
         el
       ) {
-        if (el.dataset.disabled || el.dataset.optgroup) return false;
+        // if (el.dataset.disabled || el.dataset.optgroup) return false;
+        if (el.hasAttribute('data-disabled') || el.hasAttribute('data-optgroup')) return false;
         else return true;
       });
 
       if (currentEl) {
-
-        if (currentEl.dataset.disabled || currentEl.dataset.optgroup) {
+        // if (currentEl.dataset.disabled || currentEl.dataset.optgroup) {
+        if (currentEl.hasAttribute('data-disabled') || currentEl.hasAttribute('data-optgroup')) {
           skip = true;
         }
       }
@@ -476,9 +485,11 @@ this.Element && function (ElementPrototype) {
 
     get: function (evt) {
       var getItem = this.slList.querySelector('.' + this.activeClass);
-      if (getItem.dataset.disabled) return;
+      // if (getItem.dataset.disabled) return;
+      if (getItem.hasAttribute('data-disabled')) return;
 
-      this.settings.onChange(evt, getItem.dataset.value, getItem.textContent, this.currentIndex);
+      // this.settings.onChange(evt, getItem.dataset.value, getItem.textContent, this.currentIndex);
+      this.settings.onChange(evt, getItem.getAttribute('data-value'), getItem.textContent, this.currentIndex);
       this.options.forEach(function (option) {
         option.removeAttribute('selected');
       });
@@ -505,7 +516,8 @@ this.Element && function (ElementPrototype) {
       var target = evt.target.closest('li');
 
       if (!target) return;
-      if (target.dataset.disabled || target.dataset.optgroup) {
+      // if (target.dataset.disabled || target.dataset.optgroup) {
+      if (target.hasAttribute('data-disabled') || target.hasAttribute('data-optgroup')) {
         evt.stopPropagation();
         return;
       }
