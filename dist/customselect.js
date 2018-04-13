@@ -334,7 +334,7 @@ this.Element && function (ElementPrototype) {
     position: function (evt) {
       var windowHeight = window.innerHeight;
       var selectHeight = this.slTitle.offsetHeight;
-      var offsetTop = this.slWrap.offsetTop - window.pageYOffset;
+      var offsetTop = this.slWrap.getBoundingClientRect().top;
       var offsetBottom = windowHeight - offsetTop - selectHeight;
 
       // set position list from select block
