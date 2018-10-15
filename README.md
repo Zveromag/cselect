@@ -1,46 +1,40 @@
 # Custom select
 
 ## Description
-
 This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.
 
-## Initialization
+## Demo
+[view demo](https://codepen.io/k-ivan/pen/VQGpqz)
 
+## How to use
+Include the plugin styles
+````html
+<link rel="stylesheet" src="customselect.min.css">
+````
+If you use SASS, you can import a sass source
+````scss
+@import 'customselect'
+````
+Include the custom select plugin
+````html
+<script src="customselect.min.js"></script>
+````
+Initialize the plugin
 ````javaScript
 new Select(el, options);
 ````
 
-## Demo
-````html
-<form action="" method="POST">
-<span class="catalog-sort__name">Sort:</span>
-    <select class="select" name="select">
-      <option selected value="?sort=price-max">to increase prices</option>
-      <option value="?sort=price-min">on price reduction</option>
-      <option value="?sort=date">novelty</option>
-    </select>
-  <input type="submit" value="Send"/>
-</form>
-````
-[view demo](https://codepen.io/Zveromag/pen/wrYbbN/)
-
 ## Options
-
-defaults values
+Available options and default values
 
 ````javaScript
-//animates the appearance of the list. There are 4 kinds of animation, but you can expand on their own.
-animations : ''
-
-//types of animations
-slideInUp
-zoomInDown
-slideInDown
-fadeIn
-
-//it allows you to set the maximum width of the drop-down list
-maxWidth : 0
-
-//this method allows you to get a value of the selected item.
-onChange : function(value, text, index){}
+maxWidth      : null, // maximum width value
+customClass   : '', // Additional class for more customization
+animation     : null, // Toggle animation effect
+showMaxOptions: null, // Number of visible items
+onChange      : function () { } // Callback return the selected item info
 ````
+Available animation classes fadeIn | slideInDown | slideInUp | zoomInDown or you can add your own.
+
+### `onChnage()`
+This method returns the following information `event type`, `selected value`, `selected text`, `selected index`.
