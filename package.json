@@ -1,29 +1,45 @@
 {
-  "name": "customselect",
-  "version": "2.1.0",
+  "name": "CSelect",
+  "version": "1.0.0",
   "description": "This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.",
-  "main": "index.js",
+  "main": "dist/cselect.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --inline --progress --mode development --open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zveromag/customselect.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["custom select", "select", "CSselect", "cselect"],
+  "authors": [
+    {
+      "name": "Ivan Tarakanov",
+      "email": ""
+    },
+    {
+      "name": "Ivan Kuzmichov",
+      "email": "ivan.kuzmichov@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Zveromag/customselect/issues"
   },
   "homepage": "https://github.com/Zveromag/customselect#readme",
   "devDependencies": {
-    "browser-sync": "^2.23.6",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-csso": "^3.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^3.0.0"
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "autoprefixer": "^9.2.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.4",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }

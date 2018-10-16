@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>DEMO</title>
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,600&amp;subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="customselect.css">
+  <link rel="stylesheet" href="cselect.css">
 
   <style>
     body {
@@ -31,7 +32,8 @@
       color: #555;
       background-color: #f8f8f8;
     }
-    pre > code {
+
+    pre>code {
       font-family: inherit;
       font-size: inherit;
     }
@@ -42,7 +44,9 @@
       background-color: #f8f8f8;
     }
 
-    h1,h2,h3 {
+    h1,
+    h2,
+    h3 {
       font-weight: 600;
     }
 
@@ -53,44 +57,56 @@
     section {
       padding: 1rem;
     }
+
     .select-custom .cs-label {
       border-width: 2px;
     }
+
     .select-custom .cs-label::after {
       width: 14px;
       height: 14px;
       background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdib3g9IjAgMCAyMCAyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj48cGF0aCBkPSJNMTAgMWwtNSA3aDEwbC01LTd6TTEwIDE5bDUtN2gtMTBsNSA3eiI+PC9wYXRoPjwvc3ZnPg==);
       -webkit-transform: none;
-              transform: none;
+      transform: none;
     }
+
     .select-custom.is-open .cs-label,
     .select-custom:focus .cs-label {
       border-color: #c5c5c5;
     }
+
     .select-custom.is-open .cs-label {
       background: #f0f8ff;
     }
+
     .select-custom .cs-list {
       border-width: 2px;
       border-color: #c5c5c5;
     }
+
     .select-custom .above {
       margin-bottom: -2px;
     }
+
     .select-custom .below {
       margin-top: -2px;
     }
+
     .select-custom .cs-item:hover {
       background-color: #f1f1f1;
       color: #555;
     }
-    .select-custom .cs-item.is-active, .select-custom .cs-item:hover {
+
+    .select-custom .cs-item.is-active,
+    .select-custom .cs-item:hover {
       background-color: #f1f1f1;
       color: #555;
     }
+
     .select-custom .cs-list::-webkit-scrollbar {
       width: 10px;
     }
+
     .select-custom .cs-list::-webkit-scrollbar-thumb {
       min-height: 35px;
       background-clip: padding-box;
@@ -98,22 +114,17 @@
       border: 1px solid transparent;
       border-radius: 0;
     }
+
     .select-custom .cs-list::-webkit-scrollbar-thumb:hover {
       background-color: rgba(51, 51, 51, 0.75);
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
-    <h2>Description</h2>
-
-    <p>This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default
-      stylized standard select. Mechanic behavior as much as possible trying to match the standard select'у.</p>
-
-    <h2>Initialization</h2>
-
-    <pre><code>new Select(el, options);</code></pre>
+    <h2>Examples</h2>
 
     <h2>Demo</h2>
     <form action="" method="POST">
@@ -148,34 +159,6 @@
       </select>
       <input type="submit" value="Send" />
     </form>
-
-    <h2>Options</h2>
-
-    <pre><code>animations : ''</code></pre>
-
-    <p>Animates the appearance of the list type:string. Can have the following options:</p>
-
-    <ul>
-      <li>slideInUp</li>
-      <li>zoomInDown</li>
-      <li>slideInDown</li>
-      <li>fadeIn</li>
-    </ul>
-
-    <p>Default fulfills without animation. If desired / required, you can expand the number of its animations.</p>
-
-    <hr style="border:0;border-top:1px dashed #bebebe" />
-    <pre><code><code>maxWidth :</code></code></pre>
-
-    <p>It allows you to set the maximum width of the drop-down list type:integer. If you specify a maximum width of less than
-      or equal to the original selecta, the maximum width of the original selecta will be exhibited.</p>
-    <hr style="border:0;border-top:1px dashed #bebebe" />
-    <pre><code>onChange : function(value, text, index){}</code></pre>
-
-    <p>This method allows you to get a value of the selected item.</p>
-  </div>
-  <div class="container">
-    <h2>Demos</h2>
   </div>
 
   <section>
@@ -337,70 +320,71 @@ select.update();</code></pre>
     </div>
   </section>
 
-<script src="customselect.js"></script>
-<script>
-  var el = document.getElementById('select');
-  var s = new Select(el);
+  <script src="cselect.js"></script>
+  <script>
+    var el = document.getElementById('select');
+    var s = new CSelect(el);
 
-  // Demo 1
+    // Demo 1
 
-  new Select(document.getElementById('select-callback'), {
-    onChange: function (event, value, text, index) {
-      alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
+    new CSelect(document.getElementById('select-callback'), {
+      onChange: function (event, value, text, index) {
+        alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
+      }
+    });
+
+    // Demo 2
+    new CSelect(document.getElementById('select-maxitems'), {
+      showMaxOptions: 3
+    });
+
+    // Demo 3
+    new CSelect(document.getElementById('select-maxwidth'), {
+      maxWidth: 350
+    });
+
+
+    // Demo 4
+    var options = {
+      maxWidth: 350,
+      animation: 'zoomInDown'
     }
-  });
+    var demo4 = new CSelect(document.getElementById('select-destroy'), options);
+    document.getElementById('toggle').addEventListener('click', function () {
+      var value = this.textContent;
+      if (value === 'destroy') {
+        demo4.destroy();
+        this.textContent = 'init';
+      } else {
+        demo4 = new CSelect(document.getElementById('select-destroy'), options);
+        this.textContent = 'destroy';
+      }
+    });
 
-  // Demo 2
-  new Select(document.getElementById('select-maxitems'), {
-    showMaxOptions: 3
-  });
+    // Demo 5
+    var select = document.getElementById('select-add');
+    var demo5 = new CSelect(select, {
+      maxWidth: 350,
+      animation: 'slideInDown'
+    });
 
-  // Demo 3
-  new Select(document.getElementById('select-maxwidth'), {
-    maxWidth: 350
-  });
+    document.getElementById('addoption').addEventListener('click', function () {
+      select.innerHTML += '<option value="new_option">New option</option>';
+      demo5.update();
+    });
 
+    // Demo 6
+    var demo6 = new CSelect(document.getElementById('custom'), {
+      maxWidth: 250,
+      customClass: 'select-custom',
+      animation: 'fadeIn'
+    });
 
-  // Demo 4
-  var options = {
-    maxWidth: 350,
-    animation: 'zoomInDown'
-  }
-  var demo4 = new Select(document.getElementById('select-destroy'), options);
-  document.getElementById('toggle').addEventListener('click', function () {
-    var value = this.textContent;
-    if (value === 'destroy') {
-      demo4.destroy();
-      this.textContent = 'init';
-    } else {
-      demo4 = new Select(document.getElementById('select-destroy'), options);
-      this.textContent = 'destroy';
-    }
-  });
-
-  // Demo 5
-  var select = document.getElementById('select-add');
-  var demo5 = new Select(select, {
-    maxWidth: 350,
-    animation: 'slideInDown'
-  });
-
-  document.getElementById('addoption').addEventListener('click', function () {
-    select.innerHTML += '<option value="new_option">New option</option>';
-    demo5.update();
-  });
-
-  // Demo 6
-  var demo6 = new Select(document.getElementById('custom'), {
-    maxWidth: 250,
-    customClass: 'select-custom',
-    animation: 'fadeIn'
-  });
-
-// Demo 6
-  var demo7 = new Select(document.getElementById('animation'), {
-    animation: 'slideInUp'
-  });
-</script>
+    // Demo 6
+    var demo7 = new CSelect(document.getElementById('animation'), {
+      animation: 'slideInUp'
+    });
+  </script>
 </body>
+
 </html>
