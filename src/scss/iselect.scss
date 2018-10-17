@@ -76,7 +76,7 @@ select {
     background: $list-bg;
     user-select: none;
     pointer-events: none;
-    z-index: 1;
+    z-index: 999;
   }
 
   &-item {
