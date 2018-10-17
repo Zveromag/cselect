@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>DEMO</title>
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,600&amp;subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="cselect.css">
+  <link rel="stylesheet" href="iselect.css">
 
   <style>
     body {
@@ -58,11 +58,11 @@
       padding: 1rem;
     }
 
-    .select-custom .cs-label {
+    .select-custom .is-label {
       border-width: 2px;
     }
 
-    .select-custom .cs-label::after {
+    .select-custom .is-label::after {
       width: 14px;
       height: 14px;
       background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdib3g9IjAgMCAyMCAyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj48cGF0aCBkPSJNMTAgMWwtNSA3aDEwbC01LTd6TTEwIDE5bDUtN2gtMTBsNSA3eiI+PC9wYXRoPjwvc3ZnPg==);
@@ -70,16 +70,16 @@
       transform: none;
     }
 
-    .select-custom.is-open .cs-label,
-    .select-custom:focus .cs-label {
+    .select-custom.is-open .is-label,
+    .select-custom:focus .is-label {
       border-color: #c5c5c5;
     }
 
-    .select-custom.is-open .cs-label {
+    .select-custom.is-open .is-label {
       background: #f0f8ff;
     }
 
-    .select-custom .cs-list {
+    .select-custom .is-list {
       border-width: 2px;
       border-color: #c5c5c5;
     }
@@ -92,22 +92,22 @@
       margin-top: -2px;
     }
 
-    .select-custom .cs-item:hover {
+    .select-custom .is-item:hover {
       background-color: #f1f1f1;
       color: #555;
     }
 
-    .select-custom .cs-item.is-active,
-    .select-custom .cs-item:hover {
+    .select-custom .is-item.is-active,
+    .select-custom .is-item:hover {
       background-color: #f1f1f1;
       color: #555;
     }
 
-    .select-custom .cs-list::-webkit-scrollbar {
+    .select-custom .is-list::-webkit-scrollbar {
       width: 10px;
     }
 
-    .select-custom .cs-list::-webkit-scrollbar-thumb {
+    .select-custom .is-list::-webkit-scrollbar-thumb {
       min-height: 35px;
       background-clip: padding-box;
       background-color: rgba(51, 51, 51, 0.3);
@@ -115,7 +115,7 @@
       border-radius: 0;
     }
 
-    .select-custom .cs-list::-webkit-scrollbar-thumb:hover {
+    .select-custom .is-list::-webkit-scrollbar-thumb:hover {
       background-color: rgba(51, 51, 51, 0.75);
     }
   </style>
@@ -319,26 +319,26 @@ select.update();</code></pre>
     </div>
   </section>
 
-  <script src="cselect.js"></script>
+  <script src="iselect.js"></script>
   <script>
     var el = document.getElementById('select');
-    var s = new CSelect(el);
+    var s = new ISelect(el);
 
     // Demo 1
 
-    new CSelect(document.getElementById('select-callback'), {
+    new ISelect(document.getElementById('select-callback'), {
       onChange: function (event, value, text, index) {
         alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
       }
     });
 
     // Demo 2
-    new CSelect(document.getElementById('select-maxitems'), {
+    new ISelect(document.getElementById('select-maxitems'), {
       showMaxOptions: 3
     });
 
     // Demo 3
-    new CSelect(document.getElementById('select-maxwidth'), {
+    new ISelect(document.getElementById('select-maxwidth'), {
       maxWidth: 350
     });
 
@@ -348,21 +348,21 @@ select.update();</code></pre>
       maxWidth: 350,
       animation: 'zoomInDown'
     }
-    var demo4 = new CSelect(document.getElementById('select-destroy'), options);
+    var demo4 = new ISelect(document.getElementById('select-destroy'), options);
     document.getElementById('toggle').addEventListener('click', function () {
       var value = this.textContent;
       if (value === 'destroy') {
         demo4.destroy();
         this.textContent = 'init';
       } else {
-        demo4 = new CSelect(document.getElementById('select-destroy'), options);
+        demo4 = new ISelect(document.getElementById('select-destroy'), options);
         this.textContent = 'destroy';
       }
     });
 
     // Demo 5
     var select = document.getElementById('select-add');
-    var demo5 = new CSelect(select, {
+    var demo5 = new ISelect(select, {
       maxWidth: 350,
       animation: 'slideInDown'
     });
@@ -373,14 +373,14 @@ select.update();</code></pre>
     });
 
     // Demo 6
-    var demo6 = new CSelect(document.getElementById('custom'), {
+    var demo6 = new ISelect(document.getElementById('custom'), {
       maxWidth: 250,
       customClass: 'select-custom',
       animation: 'fadeIn'
     });
 
     // Demo 6
-    var demo7 = new CSelect(document.getElementById('animation'), {
+    var demo7 = new ISelect(document.getElementById('animation'), {
       animation: 'slideInUp'
     });
   </script>

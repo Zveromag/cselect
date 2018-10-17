@@ -9,17 +9,17 @@ const paths = {
   dist: './dist'
 }
 
-const banner = `CSelect v${pkg.version} | MIT License | https://github.com/Zveromag/customselect`;
+const banner = `ISelect v${pkg.version} | MIT License | https://github.com/Zveromag/iselect`;
 
 module.exports = (env, arg) => {
   return {
     entry: [
-      `${paths.srccss}/cselect.scss`,
-      `${paths.srcjs}/cselect.js`
+      `${paths.srccss}/iselect.scss`,
+      `${paths.srcjs}/iselect.js`
     ],
     output: {
-      filename: 'cselect.js',
-      library: 'CSelect',
+      filename: 'iselect.js',
+      library: 'ISelect',
       libraryTarget: 'umd',
       libraryExport: 'default',
       umdNamedDefine: true
@@ -67,7 +67,7 @@ module.exports = (env, arg) => {
         verbose: true
       }),
       new MiniCssExtractPlugin({
-        filename: 'cselect.css'
+        filename: 'iselect.css'
       }),
       new webpack.BannerPlugin({
         test: /\.js$/,

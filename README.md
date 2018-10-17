@@ -9,19 +9,26 @@ This plugin allows you to replace the standard selected on their own, which can 
 ## How to use
 Include the plugin styles
 ````html
-<link rel="stylesheet" src="customselect.min.css">
-````
-If you use SASS, you can import a sass source
-````scss
-@import 'customselect'
+<link rel="stylesheet" src="iselect.css">
 ````
 Include the custom select plugin
 ````html
-<script src="customselect.min.js"></script>
+<script src="iselect.js"></script>
 ````
+If you using a module bundler
+````
+npm i iselect --save
+````
+````scss
+@import './node_modules/iselect/src/scss/iselect.scss'
+````
+````js
+import ISelect from 'iselect'
+````
+
 Initialize the plugin
 ````javaScript
-new Select(el, options);
+new ISelect(el, options);
 ````
 
 ## Options
