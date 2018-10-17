@@ -12,7 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/Zveromag/customselect.git"
   },
-  "keywords": ["custom select", "select", "CSselect", "cselect"],
+  "keywords": [
+    "custom select",
+    "select",
+    "CSselect",
+    "cselect"
+  ],
   "authors": [
     {
       "name": "Ivan Tarakanov",
@@ -30,9 +35,11 @@
   "homepage": "https://github.com/Zveromag/customselect#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-object-assign": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "autoprefixer": "^9.2.0",
     "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",

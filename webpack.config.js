@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const pkg = require('./package.json');
 const paths = {
   srccss: './src/scss',
@@ -31,7 +32,13 @@ module.exports = (env, arg) => {
             MiniCssExtractPlugin.loader,
             'css-loader',
             'postcss-loader',
-            'sass-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                outputStyle: 'expanded'
+              }
+            }
+
           ],
         },
         {
@@ -40,7 +47,8 @@ module.exports = (env, arg) => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/env']
+              presets: ['@babel/env'],
+              plugins: ['@babel/plugin-transform-object-assign']
             }
           }
         }
@@ -54,6 +62,10 @@ module.exports = (env, arg) => {
     },
     devtool: arg.mode === 'development' ? 'eval-source-map' : false,
     plugins: [
+      new CleanWebpackPlugin([paths.dist], {
+        exclude: ['index.html'],
+        verbose: true
+      }),
       new MiniCssExtractPlugin({
         filename: 'cselect.css'
       }),

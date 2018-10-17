@@ -13,7 +13,7 @@ class CSelect {
     this.currentIndex = 0;
 
     // default options
-    this.settings = Util.merge({
+    this.settings = Object.assign({
       maxWidth: 0,
       customClass: '',
       animation: null,
@@ -131,6 +131,8 @@ class CSelect {
       const itemsLen = this.slItems.length;
       if (this.settings.showMaxOptions <= itemsLen) {
         const height = selectHeight * this.settings.showMaxOptions;
+        console.log(height);
+
         this.slList.style.maxHeight = height + 'px';
       }
     }
@@ -237,46 +239,30 @@ class CSelect {
       this.slList.classList.remove('below')
       this.slList.classList.add('above');
 
-      Util.merge(this.slList.style, {
+      Object.assign(this.slList.style, {
         top: '',
-        bottom: selectHeight + 'px',
+        bottom: `${selectHeight}px`,
         'border-bottom': 0,
         'border-top': ''
       });
-      // this.slList.style.cssText = `
-      //   top: auto;
-      //   bottom: ${selectHeight}px;
-      //   border-bottom: 0;
-      //   border-top: '';
-      // `;
 
     } else {
       this.slList.classList.remove('above')
       this.slList.classList.add('below');
 
-      Util.merge(this.slList.style, {
+      Object.assign(this.slList.style, {
         top: `${selectHeight}px`,
         bottom: '',
         'border-bottom': '',
         'border-top': 0
-      });
-      // this.slList.style.cssText = `
-      //   top: ${selectHeight}px;
-      //   bottom: auto;
-      //   border-bottom: '';
-      //   border-top: 0;
-      // `;
+      })
     }
 
     if (this.settings.maxWidth) {
-      Util.merge(this.slList.style, {
-        width: '100%',
-        'max-width': this.settings.maxWidth + 'px'
-      });
-      // this.slList.style.cssText = `
-      //   max-width: ${this.mainSelectWidth}px;
-      //   width: '100%';
-      // `;
+      Object.assign(this.slList.style, {
+        'max-width': `${this.mainSelectWidth}px`,
+        width: '100%'
+      })
     } else {
       this.slList.style.width = this.mainSelectWidth + 'px';
     }
