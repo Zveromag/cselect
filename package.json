@@ -1,8 +1,8 @@
 {
-  "name": "ISelect",
-  "version": "0.0.9",
+  "name": "cselect",
+  "version": "1.0.0",
   "description": "This plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.",
-  "main": "dist/iselect.js",
+  "main": "dist/cselect.js",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zveromag/iselect.git"
+    "url": "git+https://github.com/Zveromag/cselect.git"
   },
   "keywords": [
     "custom select",
     "select",
-    "ISselect",
-    "iselect"
+    "CSselect",
+    "cselect"
   ],
   "authors": [
     {
@@ -30,9 +30,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Zveromag/iselect/issues"
+    "url": "https://github.com/Zveromag/cselect/issues"
   },
-  "homepage": "https://github.com/Zveromag/iselect#readme",
+  "homepage": "https://github.com/Zveromag/cselect#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-object-assign": "^7.0.0",

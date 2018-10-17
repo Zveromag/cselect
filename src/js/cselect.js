@@ -1,7 +1,7 @@
 import './polyfill';
 import Util from './utiils';
 
-class ISelect {
+class CSelect {
   constructor(el, options) {
     if (!(el instanceof Node)) {
       throw new Error('el must be a Node');
@@ -36,7 +36,7 @@ class ISelect {
   _init() {
     // Create custom select wrapper
     this.slWrap = document.createElement('div');
-    this.slWrap.className = 'is';
+    this.slWrap.className = 'cs';
     // this.slWrap.className = 'select-js__box';
     // Add focus for accessibility
     this.slWrap.setAttribute('tabindex', 0);
@@ -49,11 +49,11 @@ class ISelect {
     //  Create select name
     this.slTitle = document.createElement('div');
     // this.slTitle.className = 'select-js__name';
-    this.slTitle.className = 'is-label';
+    this.slTitle.className = 'cs-label';
 
     //  Create custom option list
     this.slList = document.createElement('ul');
-    this.slList.className = 'is-list';
+    this.slList.className = 'cs-list';
 
     //  Get select options
     this.options = Array.prototype.slice.call(
@@ -162,7 +162,7 @@ class ISelect {
 
 
       var elItem = document.createElement('li');
-      elItem.classList.add('is-item');
+      elItem.classList.add('cs-item');
 
       // Get selected index
       if (index === this.mainSelect.selectedIndex) {
@@ -173,13 +173,13 @@ class ISelect {
       if (isDisabled) {
         // elItem.dataset.disabled = isDisabled;
         elItem.setAttribute('data-disabled', isDisabled);
-        elItem.classList.add('is-item--disabled');
+        elItem.classList.add('cs-item--disabled');
       }
 
       if (isGroup) {
         // elItem.dataset.optgroup = isGroup;
         elItem.setAttribute('data-optgroup', isGroup);
-        elItem.classList.add('is-item--group');
+        elItem.classList.add('cs-item--group');
         elItem.textContent = option.getAttribute('for');
       } else {
         // elItem.dataset.selected = isSelected;
@@ -188,9 +188,9 @@ class ISelect {
           if (optgroup.hasAttribute('disabled')) {
             // elItem.dataset.disabled = isDisabled;
             elItem.setAttribute('data-disabled', true);
-            elItem.classList.add('is-item--disabled');
+            elItem.classList.add('cs-item--disabled');
           }
-          elItem.classList.add('is-item--groupchild');
+          elItem.classList.add('cs-item--groupchild');
         }
         // elItem.dataset.value = option.value;
         elItem.setAttribute('data-value', option.value);
@@ -209,7 +209,7 @@ class ISelect {
     this.slList.appendChild(this._genOptions());
 
     this.slItems = Array.prototype.slice.call(
-      this.slWrap.querySelectorAll('.is-item')
+      this.slWrap.querySelectorAll('.cs-item')
     );
 
     this.slItems.forEach(item => {
@@ -346,7 +346,7 @@ class ISelect {
   // event click document close select list
   _closeHandler(evt) {
     if (!this.isOpen) return;
-    if (evt.target.classList.contains('is-label')) return;
+    if (evt.target.classList.contains('cs-label')) return;
 
     this._close();
   }
@@ -486,4 +486,4 @@ class ISelect {
 
 }
 
-export default ISelect;
+export default CSelect;
