@@ -2,6 +2,7 @@
 [![alt text](https://img.shields.io/npm/v/cselect.svg)](https://www.npmjs.com/package/cselect)
 [![alt text](https://img.shields.io/npm/l/cselect.svg)](https://www.npmjs.com/package/cselect)
 [![alt text](https://img.shields.io/bundlephobia/min/cselect.svg)](https://www.npmjs.com/package/cselect)
+[![alt text](https://img.shields.io/npm/dt/cselect.svg)](https://www.npmjs.com/package/cselect)
 
 ## Description
 Custom select plugin allows you to replace the standard selected on their own, which can be styled as your heart desires. Default stylized standard select. Mechanic behavior as much as possible trying to match the standard selects.
