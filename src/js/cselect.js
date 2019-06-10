@@ -440,11 +440,12 @@ class CSelect {
 
     if (getItem.hasAttribute('data-disabled')) return;
 
-    this.settings.onChange(evt, getItem.getAttribute('data-value'), getItem.textContent, this.currentIndex);
     this.options.forEach(option => {
       option.removeAttribute('selected');
     });
     this.options[this.currentIndex].setAttribute('selected', true);
+    
+    this.settings.onChange(evt, getItem.getAttribute('data-value'), getItem.textContent, this.currentIndex);
 
     if (evt.type === 'keydown' && evt.which !== this.KEYS.ENTER) return;
     this._close();
