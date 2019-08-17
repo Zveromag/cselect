@@ -1,18 +1,14 @@
-$select-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNMTAuMzEyIDBMNS41IDQuNjY2LjY4OCAwIDAgLjY2NyA1LjUgNiAxMSAuNjY3Ii8+PC9zdmc+';
-$select-accent-color: #1e90ff;
-$select-active-bg: $select-accent-color;
-$select-bg: #fff;
-$list-bg: #fff;
-$select-padding: 7px 12px;
-$select-hover-bg: #f1f1f1;
-$select-hover-color: #555;
-$select-active-color: #fff;
-
-$select-border-width: 2px;
-$list-border-width: 1px;
-
-$select-border: $select-border-width solid #ddd;
-$list-border: $list-border-width solid $select-accent-color;
+$select-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNMTAuMzEyIDBMNS41IDQuNjY2LjY4OCAwIDAgLjY2NyA1LjUgNiAxMSAuNjY3Ii8+PC9zdmc+' !default;
+$select-accent-color: #1e90ff !default;
+$select-active-bg: $select-accent-color !default;
+$select-bg: #fff !default;
+$select-list-bg: #fff !default;
+$select-padding: 7px 12px !default;
+$select-hover-bg: #f1f1f1 !default;
+$select-hover-color: #555 !default;
+$select-active-color: #fff !default;
+$select-border: 2px solid #ddd !default;
+$select-list-border: 1px solid $select-accent-color !default;
 
 select {
   min-width: 100px;
@@ -72,8 +68,8 @@ select {
     visibility: hidden;
     overflow-y:auto;
     overflow-x:hidden;
-    border: $list-border;
-    background: $list-bg;
+    border: $select-list-border;
+    background: $select-list-bg;
     user-select: none;
     pointer-events: none;
     z-index: 999;
