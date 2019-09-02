@@ -3,15 +3,10 @@ import Util from './utiils';
 
 class CSelect {
   constructor(el, options) {
+
     if (!(el instanceof Node)) {
       throw new Error('el must be a Node');
     }
-
-    this.mainSelect = el;
-    this.activeClass = 'is-active';
-    this.selectClass = 'cs';
-    this.isFocus = false;
-    this.currentIndex = 0;
 
     // default options
     this.settings = Object.assign({
@@ -19,8 +14,21 @@ class CSelect {
       customClass: '',
       animation: null,
       showMaxOptions: null,
+      mobileSkip: true,
       onChange: function () { }
     }, options);
+
+    this.mobileSkip = this.settings.mobileSkip && Util.isMobile;
+
+    if (this.mobileSkip) {
+      return false;
+    }
+
+    this.mainSelect = el;
+    this.activeClass = 'is-active';
+    this.selectClass = 'cs';
+    this.isFocus = false;
+    this.currentIndex = 0;
 
     // Keybord shortcuts
     this.KEYS = {
@@ -444,7 +452,7 @@ class CSelect {
       option.removeAttribute('selected');
     });
     this.options[this.currentIndex].setAttribute('selected', true);
-    
+
     this.settings.onChange(evt, getItem.getAttribute('data-value'), getItem.textContent, this.currentIndex);
 
     if (evt.type === 'keydown' && evt.which !== this.KEYS.ENTER) return;
@@ -464,6 +472,9 @@ class CSelect {
   }
 
   update() {
+    if (this.mobileSkip) {
+      return;
+    }
     // Clear all list
     this.slList.innerHTML = '';
 
@@ -472,6 +483,9 @@ class CSelect {
   }
 
   destroy() {
+    if (this.mobileSkip) {
+      return;
+    }
     this._unbindEvents();
 
     this.slWrap.removeChild(this.slList);
