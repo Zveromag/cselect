@@ -15,6 +15,7 @@ class CSelect {
       animation: null,
       showMaxOptions: null,
       mobileSkip: true,
+      onInit: function () {},
       onChange: function () { }
     }, options);
 
@@ -117,6 +118,12 @@ class CSelect {
       this.slWrap,
       this.mainSelect.nextSibling
     );
+
+    this.settings.onInit({
+      wrapper: this.slWrap,
+      list: this.slList,
+      title: this.slTitle
+    });
 
     this.listHeight = this.slList.offsetHeight;
 
@@ -375,8 +382,8 @@ class CSelect {
     this._scroll();
   }
 
-   // Move direction
-   _moveDown() {
+  // Move direction
+  _moveDown() {
     // var self = this;
     this.currentIndex += 1;
 

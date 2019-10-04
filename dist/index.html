@@ -328,6 +328,9 @@ select.update();</code></pre>
     // Demo 1
 
     new CSelect(document.getElementById('select-callback'), {
+      onInit: function (data) {
+        console.log(data);
+      },
       onChange: function (event, value, text, index) {
         alert('Event: ' + event.type + '\nYou choised (' + text + ')\nIndex(' + index + ')\nValue(' + value + ')')
       }
