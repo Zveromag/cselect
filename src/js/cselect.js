@@ -166,6 +166,8 @@ class CSelect {
     this.options = Array.prototype.slice.call(
       this.mainSelect.querySelectorAll('option, optgroup')
     );
+    // filter array origin options(not optgroup)
+    const filterOptions = this.options.filter(option => option.tagName === 'OPTION')
 
     const frag = document.createDocumentFragment();
 
@@ -180,7 +182,7 @@ class CSelect {
       elItem.classList.add(`${this.selectClass}-item`);
 
       // Get selected index
-      if (index === this.mainSelect.selectedIndex) {
+      if (option === filterOptions[this.mainSelect.selectedIndex]) {
         // elItem.dataset.selected = true;
         elItem.setAttribute('data-selected', true);
       }
